@@ -1,0 +1,197 @@
+
+<!DOCTYPE html><html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hack FF & ML - Pro Access</title>
+    <style>
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px red, -2px -2px blue; }
+            25% { text-shadow: -2px -2px red, 2px 2px blue; }
+            50% { text-shadow: 2px -2px red, -2px 2px blue; }
+            75% { text-shadow: -2px 2px red, 2px -2px blue; }
+            100% { text-shadow: 2px 2px red, -2px -2px blue; }
+        }body {
+        font-family: 'Courier New', monospace;
+        background: black;
+        color: #00ff00;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        background: #111;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #00ff00;
+        text-align: left;
+    }
+
+    h2 {
+        text-align: center;
+        animation: glitch 1s infinite alternate;
+    }
+
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        font-family: 'Courier New', monospace;
+    }
+
+    input, select {
+        background: black;
+        color: #00ff00;
+        border: 1px solid #00ff00;
+    }
+
+    button {
+        background: #00ff00;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #00cc00;
+    }
+
+    .terminal {
+        background: black;
+        padding: 10px;
+        height: 150px;
+        overflow: hidden;
+        border: 1px solid #00ff00;
+        font-size: 12px;
+        margin-top: 10px;
+        text-align: left;
+    }
+
+    .progress {
+        width: 100%;
+        height: 20px;
+        background: #222;
+        margin-top: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #00ff00;
+        transition: width 1s linear;
+    }
+
+    #result {
+        display: none;
+        margin-top: 20px;
+        text-align: left;
+        background: black;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #00ff00;
+    }
+
+    .email {
+        font-weight: bold;
+        color: #00ff00;
+    }
+
+    .password {
+        color: #ff4444;
+    }
+</style>
+
+</head>
+<body><div class="container">
+    <h2>HACK FF & ML - PRO ACCESS</h2>
+    <select id="game">
+        <option value="FF">Free Fire</option>
+        <option value="ML">Mobile Legends</option>
+    </select>
+    <input type="text" id="username" placeholder="Masukkan Username">
+    <input type="text" id="gameID" placeholder="Masukkan ID Game">
+    <button onclick="startProcess()">Proses</button>
+
+    <div class="terminal" id="terminal">
+        <p>[SYSTEM] Ready...</p>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar"></div>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function generateFakeData(gameID) {
+        let baseEmail = "akun" + btoa(gameID).slice(0, 5) + "@gmail.com";
+        let basePassword = "pw" + btoa(gameID).slice(-5);
+        return { email: baseEmail, password: basePassword };
+    }
+
+    function startProcess() {
+        let username = document.getElementById("username").value;
+        let gameID = document.getElementById("gameID").value;
+        let game = document.getElementById("game").value;
+        let terminal = document.getElementById("terminal");
+
+        if (username === "" || gameID === "") {
+            alert("Masukkan Username dan ID Game!");
+            return;
+        }
+
+        document.querySelector(".progress").style.display = "block";
+        let progressBar = document.querySelector(".progress-bar");
+        progressBar.style.width = "0%";
+
+        let logs = [
+            "[SYSTEM] Connecting to server...",
+            "[HACK] Target found: " + username + " (ID: " + gameID + ")",
+            "[BYPASS] Injecting bypass script...",
+            "[SECURITY] Bypassing security layer...",
+            "[ACCESS] Retrieving credentials...",
+            "[DONE] Hack Complete!"
+        ];
+
+        let progress = 0;
+        let logIndex = 0;
+        terminal.innerHTML = ""; // Reset terminal
+
+        let interval = setInterval(() => {
+            progress += 20;
+            progressBar.style.width = progress + "%";
+
+            if (logIndex < logs.length) {
+                terminal.innerHTML += "<p>" + logs[logIndex] + "</p>";
+                logIndex++;
+            }
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                showResults(gameID);
+            }
+        }, 5000); // Total waktu 1 menit
+    }
+
+    function showResults(gameID) {
+        let fakeData = generateFakeData(gameID);
+        document.getElementById("result").innerHTML = `
+            <h3>HACK SUKSES!</h3>
+            <p>Email: <span class="email">${fakeData.email}</span></p>
+            <p>Password: <span class="password">${fakeData.password}</span></p>
+        `;
+        document.getElementById("result").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
